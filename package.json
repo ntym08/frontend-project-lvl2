@@ -1,6 +1,6 @@
 {
   "name": "@hexlet/code",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "bin": {
     "gendiff": "bin/gendiff.js"
   },
@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/ntym08/frontend-project-lvl2/issues"
   },
-  "homepage": "https://github.com/ntym08/frontend-project-lvl2#readme"
+  "homepage": "https://github.com/ntym08/frontend-project-lvl2#readme",
+  "dependencies": {
+    "commander": "^8.2.0"
+  }
 }
