@@ -1,0 +1,23 @@
+{
+  "name": "@hexlet/code",
+  "version": "1.0.0",
+  "bin": {
+    "gendiff": "bin/gendiff.js"
+  },
+  "type": "module",
+  "description": "[![Actions Status](https://github.com/ntym08/frontend-project-lvl2/workflows/hexlet-check/badge.svg)](https://github.com/ntym08/frontend-project-lvl2/actions)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ntym08/frontend-project-lvl2.git"
+  },
+  "author": "Nataly Lapina lapinann08@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ntym08/frontend-project-lvl2/issues"
+  },
+  "homepage": "https://github.com/ntym08/frontend-project-lvl2#readme"
+}
