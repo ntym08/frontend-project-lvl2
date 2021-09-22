@@ -5,7 +5,7 @@
     "gendiff": "bin/gendiff.js"
   },
   "type": "module",
-  "description": "[![Actions Status](https://github.com/ntym08/frontend-project-lvl2/workflows/hexlet-check/badge.svg)](https://github.com/ntym08/frontend-project-lvl2/actions)",
+  "description": "A program for determining the difference between two data structures",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
