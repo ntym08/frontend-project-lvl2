@@ -20,16 +20,15 @@ const genDiff = (filepath1, filepath2) => {
   const diff = sotredAllKeys.reduce((acc, key) => {
     if (_.has(data1, key) && _.has(data2, key)) {
       if (data1[key] === data2[key]) {
-        acc += `    ${key}: ${data1[key]}\n`;
-      } else {
-        acc += `  - ${key}: ${data1[key]}\n  + ${key}: ${data2[key]}\n`;
+        return `${acc}    ${key}: ${data1[key]}\n`;
       }
+      return `${acc}  - ${key}: ${data1[key]}\n  + ${key}: ${data2[key]}\n`;
     }
     if (_.has(data1, key) && !_.has(data2, key)) {
-      acc += `  - ${key}: ${data1[key]}\n`;
+      return `${acc}  - ${key}: ${data1[key]}\n`;
     }
     if (!_.has(data1, key) && _.has(data2, key)) {
-      acc += `  + ${key}: ${data2[key]}\n`;
+      return `${acc}  + ${key}: ${data2[key]}\n`;
     }
     return acc;
   }, '');
