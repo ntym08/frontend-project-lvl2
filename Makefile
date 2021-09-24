@@ -8,4 +8,9 @@ lint:
 	npx eslint .
 
 test:
-	npx jest --watch
+	npm test
+
+test-coverage:
+	npm test -- --coverage --coverageProvider=v8
+
+.PHONY: test

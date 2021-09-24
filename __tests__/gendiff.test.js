@@ -10,6 +10,6 @@ const result1 = `{
   + verbose: true
 }`;
 
-test('gendiff', () => {
+test('gendiff of flat json file', () => {
   expect(genDiff('__fixtures__/file1.json', '__fixtures__/file2.json')).toBe(result1);
 });
