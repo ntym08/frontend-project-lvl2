@@ -8,7 +8,7 @@
   "description": "A program for determining the difference between two data structures",
   "main": "index.js",
   "scripts": {
-    "test": "npx jest --watch"
+    "test": "npx jest --bail"
   },
   "repository": {
     "type": "git",
