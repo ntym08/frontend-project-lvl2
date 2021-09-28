@@ -1,7 +1,7 @@
-import _ from 'lodash';
 import fs from 'fs';
 import path from 'path';
 import parse from './parsers.js';
+import formDiff from './formDiff.js';
 
 const getDataFormat = (filePath) => path.extname(filePath);
 
@@ -20,28 +20,8 @@ const getNormalizedContent = (filePath) => {
 const genDiff = (filePath1, filePath2) => {
   const data1 = getNormalizedContent(filePath1);
   const data2 = getNormalizedContent(filePath2);
-
-  const data1Keys = Object.keys(data1);
-  const data2Keys = Object.keys(data2);
-
-  const sotredAllKeys = _.sortBy(_.union(data1Keys, data2Keys));
-
-  const diff = sotredAllKeys.reduce((acc, key) => {
-    if (_.has(data1, key) && _.has(data2, key)) {
-      if (data1[key] === data2[key]) {
-        return `${acc}    ${key}: ${data1[key]}\n`;
-      }
-      return `${acc}  - ${key}: ${data1[key]}\n  + ${key}: ${data2[key]}\n`;
-    }
-    if (_.has(data1, key) && !_.has(data2, key)) {
-      return `${acc}  - ${key}: ${data1[key]}\n`;
-    }
-    if (!_.has(data1, key) && _.has(data2, key)) {
-      return `${acc}  + ${key}: ${data2[key]}\n`;
-    }
-    return acc;
-  }, '');
-  return `{\n${diff}}`;
+  const diff = formDiff(data1, data2);
+  return diff;
 };
 
 export default genDiff;
