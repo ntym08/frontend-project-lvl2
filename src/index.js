@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import parse from './parsers.js';
 import formDiff from './formDiff.js';
+import makeStylish from './stylish.js';
 
 const getDataFormat = (filePath) => path.extname(filePath);
 
@@ -17,11 +18,16 @@ const getNormalizedContent = (filePath) => {
   return parse(data, dataFormat);
 };
 
-const genDiff = (filePath1, filePath2) => {
+const getDiff = (filePath1, filePath2) => {
   const data1 = getNormalizedContent(filePath1);
   const data2 = getNormalizedContent(filePath2);
   const diff = formDiff(data1, data2);
   return diff;
+};
+
+const genDiff = (filePath1, filePath2) => {
+  const diff = getDiff(filePath1, filePath2);
+  return makeStylish(diff);
 };
 
 export default genDiff;
