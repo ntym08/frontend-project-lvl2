@@ -1,19 +1,34 @@
-import _ from 'lodash';
-
-const makeStylish = (value) => {
+const makeStylish = (diff) => {
   const iter = (currentValue, depth) => {
-    if (!_.isObject(currentValue)) {
-      return currentValue;
-    }
-    const replacer = ' ';
-    const indentSize = depth * 4;
-    const currentIndent = replacer.repeat(indentSize);
-    const bracketIndent = replacer.repeat(indentSize - 4);
-    const lines = Object.keys(currentValue).map((key) => `${currentIndent}${key}: ${iter(currentValue[key], depth + 1)}`);
+    const signUnchanged = '  ';
+    const signDeleted = '- ';
+    const signAdded = '+ ';
+    const indentType = ' ';
+    const spacesCount = 4;
+    const indentSize = depth * spacesCount;
+    const currentIndent = indentType.repeat(indentSize - 2);
+    const bracketIndent = indentType.repeat(indentSize - spacesCount);
 
-    return ['{', ...lines, `${bracketIndent}}`].join('\n');
+    const makeString = (object) => {
+      if (object.status === 'nested') {
+        return `${currentIndent}${signUnchanged}${object.key}: ${iter(object.descendants, depth + 1)}`;
+      }
+      if (object.status === 'added') {
+        return `${currentIndent}${signAdded}${object.key}: ${object.value}`;
+      }
+      if (object.status === 'unchanged') {
+        return `${currentIndent}${signUnchanged}${object.key}: ${object.value}`;
+      }
+      if (object.status === 'deleted') {
+        return `${currentIndent}${signDeleted}${object.key}: ${object.value}`;
+      }
+      return `${currentIndent}${signDeleted}${object.key}: ${object.value1}\n${currentIndent}${signAdded}${object.key}: ${object.value2}`;
+    };
+
+    const result = currentValue.map((item) => makeString(item));
+    return ['{', ...result, `${bracketIndent}}`].join('\n');
   };
-  return iter(value, 1);
+  return iter(diff, 1);
 };
 
 export default makeStylish;
