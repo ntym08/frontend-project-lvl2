@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import parse from './parsers.js';
 import formDiff from './formDiff.js';
-import makeStylish from './stylish.js';
+import formatDiff from './formatters/index.js';
 
 const getDataFormat = (filePath) => path.extname(filePath);
 
@@ -27,8 +27,7 @@ const getDiff = (filePath1, filePath2) => {
 
 const genDiff = (filePath1, filePath2, formatName = 'stylish') => {
   const diff = getDiff(filePath1, filePath2);
-  if (formatName === 'stylish') return makeStylish(diff);
-  return 2;
+  return formatDiff(diff, formatName);
 };
 
 export default genDiff;
