@@ -3,7 +3,7 @@ import _ from 'lodash';
 const indentType = ' ';
 const spacesCount = 4;
 const signUnchanged = ' ';
-const signDeleted = '-';
+const signRemoved = '-';
 const signAdded = '+';
 
 const setIndent = (depth, spaces = 2) => indentType.repeat(depth * spacesCount - spaces);
@@ -26,10 +26,10 @@ const makeStylish = (diff) => {
       if (object.status === 'unchanged') {
         return `${setIndent(depth)}${signUnchanged} ${object.key}: ${stringify(object.value, depth + 1)}`;
       }
-      if (object.status === 'deleted') {
-        return `${setIndent(depth)}${signDeleted} ${object.key}: ${stringify(object.value, depth + 1)}`;
+      if (object.status === 'removed') {
+        return `${setIndent(depth)}${signRemoved} ${object.key}: ${stringify(object.value, depth + 1)}`;
       }
-      return `${setIndent(depth)}${signDeleted} ${object.key}: ${stringify(object.value1, depth + 1)}\n${setIndent(depth)}${signAdded} ${object.key}: ${stringify(object.value2, depth + 1)}`;
+      return `${setIndent(depth)}${signRemoved} ${object.key}: ${stringify(object.value1, depth + 1)}\n${setIndent(depth)}${signAdded} ${object.key}: ${stringify(object.value2, depth + 1)}`;
     };
 
     const result = currentValue.map((item) => makeString(item));

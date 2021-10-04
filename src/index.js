@@ -25,9 +25,9 @@ const getDiff = (filePath1, filePath2) => {
   return diff;
 };
 
-const genDiff = (filePath1, filePath2, format = 'stylish') => {
+const genDiff = (filePath1, filePath2, formatName = 'stylish') => {
   const diff = getDiff(filePath1, filePath2);
-  if (format === 'stylish') return makeStylish(diff);
+  if (formatName === 'stylish') return makeStylish(diff);
   return 2;
 };
 
