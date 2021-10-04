@@ -2,4 +2,4 @@
 
 #### Usage example
 
-[![asciicast](https://asciinema.org/a/439417.svg)](https://asciinema.org/a/439417)
+[![asciicast](https://asciinema.org/a/439908.svg)](https://asciinema.org/a/439908)
