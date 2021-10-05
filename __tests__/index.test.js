@@ -18,10 +18,18 @@ test('json-plain', () => {
   expect(genDiff(getFixturePath('file1.json'), getFixturePath('file2.json'), 'plain')).toBe(readFile('result-plain'));
 });
 
+test('json-json', () => {
+  expect(genDiff(getFixturePath('file1.json'), getFixturePath('file2.json'), 'json')).toBe(readFile('result-json'));
+});
+
 test('yaml-stylish', () => {
   expect(genDiff(getFixturePath('file1.yaml'), getFixturePath('file2.yaml'))).toBe(readFile('result-stylish'));
 });
 
 test('yaml-plain', () => {
   expect(genDiff(getFixturePath('file1.yaml'), getFixturePath('file2.yaml'), 'plain')).toBe(readFile('result-plain'));
+});
+
+test('yaml-json', () => {
+  expect(genDiff(getFixturePath('file1.yaml'), getFixturePath('file2.yaml'), 'json')).toBe(readFile('result-json'));
 });
