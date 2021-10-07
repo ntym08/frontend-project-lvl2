@@ -4,7 +4,7 @@ import parse from './parsers.js';
 import formDiff from './formDiff.js';
 import formatDiff from './formatters/index.js';
 
-const getDataFormat = (filePath) => path.extname(filePath);
+const getDataFormat = (filePath) => path.extname(filePath).slice(1);
 
 const getContentOfFile = (filePath) => {
   const fullPath = path.resolve(process.cwd(), filePath);
