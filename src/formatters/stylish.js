@@ -17,21 +17,21 @@ const stringify = (value, depth) => {
 const makeStylish = (diff) => {
   const iter = (currentValue, depth) => {
     const makeString = (object) => {
-      if (object.status === 'nested') {
-        return `${setIndent(depth)}${signUnchanged} ${object.key}: ${iter(object.descendants, depth + 1)}`;
+      switch (object.status) {
+        case 'nested':
+          return `${setIndent(depth)}${signUnchanged} ${object.key}: ${iter(object.descendants, depth + 1)}`;
+        case 'added':
+          return `${setIndent(depth)}${signAdded} ${object.key}: ${stringify(object.value, depth + 1)}`;
+        case 'unchanged':
+          return `${setIndent(depth)}${signUnchanged} ${object.key}: ${stringify(object.value, depth + 1)}`;
+        case 'removed':
+          return `${setIndent(depth)}${signRemoved} ${object.key}: ${stringify(object.value, depth + 1)}`;
+        case 'updated':
+          return `${setIndent(depth)}${signRemoved} ${object.key}: ${stringify(object.value1, depth + 1)}\n${setIndent(depth)}${signAdded} ${object.key}: ${stringify(object.value2, depth + 1)}`;
+        default:
+          throw new Error(`Unknown status: '${object.status}'!`);
       }
-      if (object.status === 'added') {
-        return `${setIndent(depth)}${signAdded} ${object.key}: ${stringify(object.value, depth + 1)}`;
-      }
-      if (object.status === 'unchanged') {
-        return `${setIndent(depth)}${signUnchanged} ${object.key}: ${stringify(object.value, depth + 1)}`;
-      }
-      if (object.status === 'removed') {
-        return `${setIndent(depth)}${signRemoved} ${object.key}: ${stringify(object.value, depth + 1)}`;
-      }
-      return `${setIndent(depth)}${signRemoved} ${object.key}: ${stringify(object.value1, depth + 1)}\n${setIndent(depth)}${signAdded} ${object.key}: ${stringify(object.value2, depth + 1)}`;
     };
-
     const result = currentValue.map((item) => makeString(item));
     return ['{', ...result, `${setIndent(depth, spacesCount)}}`].join('\n');
   };
