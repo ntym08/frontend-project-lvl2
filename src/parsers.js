@@ -1,8 +1,13 @@
 import yaml from 'js-yaml';
 
 export default (data, dataFormat) => {
-  if (dataFormat === 'yml' || dataFormat === 'yaml') {
-    return yaml.load(data);
+  switch (dataFormat) {
+    case 'yaml':
+    case 'yml':
+      return yaml.load(data);
+    case 'json':
+      return JSON.parse(data);
+    default:
+      throw new Error(`Unknown data format: '${dataFormat}'!`);
   }
-  return JSON.parse(data);
 };
